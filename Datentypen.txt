@@ -1,0 +1,66 @@
+#Was sind Datentypen?
+
+festgelegte Interpretation für Bitmuster
+versch. Interpretationen möglich:
+ 	- als ganze Zahl ggf mit Vorzeichen
+	- als numerische Kodierung von Zeichen (ASCII Code für Buchstaben, Ziffern, Sonderzeichen)
+	- als Verkettung von Zeichen (Zeichenketten)
+	- Gleitkommazahlen
+	- Wahrheitswerte (boolean)
+	- aus atomaren Datentypen lassen sich neue Datentypen ableiten
+	- mehrere hiervon lassen sich so zu komplexeren Datenstrukturen zusammensetzen
+
+Ein Datentyp legt auch immer einen Wertebereich fest, bestimmt so welche Daten zulässig sind
+sorgt u.a. für Exklusivität der möglichen Eingabe.
+
+Datentyp definiert Anzahl an Bytes, die eine Variable im Speicher belegt.
+
+Datentypen legen (indirekt) fest, welche Operationen mit den Werten, die sie repräsentieren, durchgeführt werden können.
+	- Zahlen z.B. lassen mathematische Operationen zu
+	- Strings können groß und klein geschrieben werden, oder in substrings zerlegt werden. etc.
+
+#Primitive / Elementare Datentypen
+- int (System.Int32) - ganze Zahlen
+- float, double (System.Single, System.Double) - Gleitkommazahlen für Hardware, basiert auf binärem System - Rundungsfehler möglich
+- decimal - Gleitkommazahl, allerdings basierend auf Dezimalsystem - exakte Darstellung möglich
+	- Suffixe helfen, um geschriebenen Zahlen einen Datentyp zuzuordnen (wenn Sie noch nicht Teil einer Variablen sind):
+	- 1F = float
+	- 1D = double
+	- 1M = decimal
+- string (System.String) - Zeichenketten
+- char (System.Char) - ein Zeichen
+- bool (System.Boolean) - Wahrheitswerte
+
+#Achtung:
+FLOAT 7und DOUBLE werden direkt auf Hardware abgebildet: sparsame Typen, aber ungenau, da Zahlen über Bitmuster dargestellt werden.
+Bsp: 0,1 in Float und Double ist in binär in Wirklichkeit 0,0999999999. Gefahr von Rundungsfehlern bei Berechnungen!
+DECIMAL umgeht das via Software
+
+Datentypen: C# 8 mit VS19 Buch S.84, implizite Konvertierung: 91
+
+- Konvertierungen: zB. Methoden der Klasse 'System.Convert' (Convert.ToInt32, Convert.ToString etc)
+	- jeder Datentyp hat eine ToString Methode, um einen Wert in einen String zu konvertieren
+	- viele Datentypen haben eine Parse Methode, um einen String zu konvertieren
+
+- einige Typkonvertierungen nimmt Compiler automatisch vor, unter der Voraussetzung, dass es keinen Datenverlust gibt (implizite Konvertierungen)
+	Bsp: float into double:
+	float f = 1.25f;
+	double d = f; // Zuweisung hier problemlos möglich, da double höhere Auflösung hat als foat, ansonsten selber Datentyp - kein Informationsverlust
+
+#Arithmetische Operatoren
+
+	- Achtung: dividieren wir ganzzahlige Operatoren ohne weitere Angabe, werden diese autom. als int wahrgenommen, und auch das Ergebnis wird int, also Nachkommastellen ABGESCHNITTEN.
+		   - um dies zu vermeiden muss mindestens ein Operator als double, float oder decimal erklärt werden
+		   - bsp: double quotient = 1/2 ->Ergebnis:0
+		   - bsp: double quotient = 1.0/2 ->Ergebnis:0.5 (1.0 wird als Gleitkommazahl vom Programm automat. verstanden)
+		   - bsp: double quotient = 1D/2 ->Ergebnis:0.5 (1D wurde als double deklariert, damit wird das Ergebnis auch double)
+
+
+#Glossar INSTANZ: u.a. ein Objekt einer Klasse, ansonsten auf viele Felder in deer Programmierung dehnbar
+
+#Dokumentation API: https://docs.microsoft.com/en-us/dotnet/api/?view=net-6.0
+Üben:
+Codewars
+Project Euler
+
+
