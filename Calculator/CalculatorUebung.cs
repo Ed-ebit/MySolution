@@ -18,6 +18,7 @@ internal class CalculatorUebung
         if (z.Length < 2)
         {
             Console.WriteLine("Die Quersumme von {0} ist {1}", str, Quer(str));
+            Console.WriteLine("Konvertiert man diese zahl via ASCII-Code in einen String, so lautet dieser: {0}!", Intconv(Quer(str)));
         }
         else
         {
@@ -31,6 +32,7 @@ internal class CalculatorUebung
                 summe += zahl;
             }
             Console.WriteLine("ist genau {0}!", summe);
+            Console.WriteLine("Konvertiert man diese zahl via ASCII-Code in einen String, so lautet dieser: {0}!", Intconv (summe));
         }
 
     }
@@ -47,5 +49,10 @@ internal class CalculatorUebung
         return qsum;
 
     }
+    //public static string Intconv (int convert)
+    //{
+    //    string str = ;
+    //    return str;
+    //}
 }
 
