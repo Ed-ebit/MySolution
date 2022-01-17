@@ -19,9 +19,9 @@ namespace Utility
         public static int CountVocals (string s)
         {
             int anzahl = 0;
-            for (int i = 0;i<=s.Length; i++)
+            for (int i = 0;i<s.Length; i++)
             {
-                if (s[i].Equals("a", StringComparison.CurrentCultureIgnoreCase) || s[i] = "e" || s[i] = "i" || s[i] = "o" || s[i] = "u")
+                if ( s[i] == 'e' || s[i] == 'i' || s[i] == 'o' || s[i] == 'u')
                 {
                     anzahl += 1;
                 }
@@ -29,9 +29,10 @@ namespace Utility
             return anzahl;
         }
 
-        public static string ReplaceUmlaute(string s)
-        {
-
-        }
+        //public static string ReplaceUmlaute(string s)
+        //{
+            
+        //}
     }
 }
+
