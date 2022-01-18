@@ -9,9 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kontrollstrukt.", "Kontroll
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Calculator", "Calculator\Calculator.csproj", "{9DB9B798-12AD-473F-BC84-A8D68CCA7466}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utility", "Utility\Utility.csproj", "{80200916-9BC8-4701-AA26-D8340CFDFDC7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Utility", "Utility\Utility.csproj", "{80200916-9BC8-4701-AA26-D8340CFDFDC7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestUtilities", "TestUtilities\TestUtilities.csproj", "{7FB120C9-FEB4-4196-8CA1-844ECA96D1FA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestUtilities", "TestUtilities\TestUtilities.csproj", "{7FB120C9-FEB4-4196-8CA1-844ECA96D1FA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpassmitKlassen", "SpassmitKlassen\SpassmitKlassen.csproj", "{96152CDC-DE87-4597-A221-4182B9137CEA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{7FB120C9-FEB4-4196-8CA1-844ECA96D1FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7FB120C9-FEB4-4196-8CA1-844ECA96D1FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7FB120C9-FEB4-4196-8CA1-844ECA96D1FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96152CDC-DE87-4597-A221-4182B9137CEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96152CDC-DE87-4597-A221-4182B9137CEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96152CDC-DE87-4597-A221-4182B9137CEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96152CDC-DE87-4597-A221-4182B9137CEA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
