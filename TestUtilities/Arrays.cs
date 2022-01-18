@@ -1,6 +1,6 @@
 ﻿using Utility;
 
-public class Arrays
+public class quadratArrays
 {
     public static void Main()
     {
@@ -76,7 +76,6 @@ public class Arrays
                 {
                     Console.Write("{0,4}", y * i);
                     zahlen[i, y] = y * i;
-
                 }
 
             }
