@@ -1,7 +1,7 @@
 ﻿using Utility;
 public class SpassmitKlassen
 {
-    public static void Main()
+    public static void MainGeometrie()
     {
         KreisKlasse? circle = null;
         // ? sorgt hier dafür, das definiertes Objekt null sein darf
@@ -45,5 +45,36 @@ public class SpassmitKlassen
         geilererKreis.Describe();
 
 
+        // Neu: Rechteck
+        Console.WriteLine();
+
+        RechteckKlasse einRechteck = new RechteckKlasse();
+        einRechteck.SetHeight(10);
+        einRechteck.SetWidth(15);
+
+        einRechteck.Describe();
+
+        //Jetzt: Dreieck
+        Console.WriteLine();
+
+        DreieckKlasse einDreieck = new DreieckKlasse(5,5);
+        einDreieck.Describe();
+        DreieckKlasse t = DreieckKlasse.CreateRightAngled(2, 5);
+        t.Describe();
+
+
+
+
+
+
+
+    }
+
+    public static void Main()
+    {
+        Person p = new Person("Hans Meyer");
+        Console.WriteLine(p.Name);
+        p.Name = "Claire Grube";
+        Console.WriteLine(p.Name);
     }
 }
