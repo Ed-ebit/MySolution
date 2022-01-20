@@ -1,8 +1,17 @@
 ﻿public class Person
 {
+
+    // Field / Instanzattribut
     private string _Name;
+
+
+    // PROPERTIES:
     //ein Property namens Name
     //privater Setter und einem public Getter
+    // erlaubt es, keine Get und Set Methode bauen und später im Programm aufrufen zu müssen
+    // so kann auf Name später mit einfacher Syntax zugegriffen werden
+    // (z.B. Person1.Name statt Person.GetName
+    // Heisst: eine vereinfachung des Codes
 
     public string Name
     {

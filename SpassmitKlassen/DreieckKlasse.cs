@@ -1,5 +1,6 @@
 ﻿public class DreieckKlasse
 {
+    //Fields / Instanzattribute
     private double SideA;
     private double SideB;
     private double SideC;
