@@ -77,7 +77,7 @@
         this.Adresse.Describe();
     }
 
-    //Übung: Klasse namens Adress - Straße, Hausnummer, Wohnort und Land - alle Properties als lesen und schreiben + Methode Adresse
+    // Übung: Klasse namens Adress - Straße, Hausnummer, Wohnort und Land - alle Properties als lesen und schreiben + Methode Adresse
     // Property des Datentyps Adress, nur lesen
     // +2 Konstruktoren in die Klasse
 
