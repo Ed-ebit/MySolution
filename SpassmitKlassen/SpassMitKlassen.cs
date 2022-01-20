@@ -72,9 +72,24 @@ public class SpassmitKlassen
 
     public static void Main()
     {
-        Person p = new Person("Hans Meyer");
+        Person p = new Person("Hans Meyer", new DateTime(2002,04,19), "hazelmop", new Adress("Superstraße", "1b", "Erfurt", "Dänemark")) { Gender=Gender.Male};
         Console.WriteLine(p.Name);
-        p.Name = "Claire Grube";
-        Console.WriteLine(p.Name);
+        Console.WriteLine(p.Birthdate);
+        p.Describe();
+        p.Gender = Gender.Female;// 2 Arten, um Gender zu geben: initial (oben) und spätere Änderung
+        p.Describe();
+        p.Adresse.Describe();
+        // Adresse für Person hat nur Getter, in Klasse Person kann keine neue Adresse einer best. Person zugewiesen werden
+        //(Referenz ist konstant)
+        //Ihr Adressobjekt kannn aber noch geändert werden,
+        //indem über konstante Referenz auf Adressklasse zugegriffen wird und da drin geändert wird.
+        p.Adresse.Ort = "Sangerhausen";
+        p.Adresse.Describe();
+        //Lösungen: man kommt über den Getter nur an eine Kopie der in Klasse geschriebenen Daten
+
+
+        //Übung: implementiere eine Klasse Buchexemplar mit: eindeutige ID (Guid - global unique ID)
+        // Titel, Autoren (stringarray),Seitenzahl, Sachgebiet, Medium (enum - hardcov, softc, ebook, audiobook)
+        //ISBN (globale Eindeutigkeit, aber nicht exemplareindeutigkeit , Zusatzinfos
     }
 }
