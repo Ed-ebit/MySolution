@@ -57,7 +57,7 @@ public class SpassmitKlassen
         //Jetzt: Dreieck
         Console.WriteLine();
 
-        DreieckKlasse einDreieck = new DreieckKlasse(5,5);
+        DreieckKlasse einDreieck = new DreieckKlasse(5);
         einDreieck.Describe();
         DreieckKlasse t = DreieckKlasse.CreateRightAngled(2, 5);
         t.Describe();
