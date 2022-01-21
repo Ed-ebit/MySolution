@@ -1,5 +1,6 @@
-﻿public enum Medium
+﻿public enum BookMedium
 {
+    None,
     Hardcover,
     Softcover,
     Ebook,

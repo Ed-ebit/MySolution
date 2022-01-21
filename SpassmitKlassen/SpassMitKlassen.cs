@@ -91,5 +91,17 @@ public class SpassmitKlassen
         //Übung: implementiere eine Klasse Buchexemplar mit: eindeutige ID (Guid - global unique ID)
         // Titel, Autoren (stringarray),Seitenzahl, Sachgebiet, Medium (enum - hardcov, softc, ebook, audiobook)
         //ISBN (globale Eindeutigkeit, aber nicht exemplareindeutigkeit , Zusatzinfos
+
+        Buch zeSharp = new Buch("C#",new string[] { "Felix", "Karl", "Maria" },1500,"Programmierung",BookMedium.Hardcover,"9-85264713","Superbuch");
+        zeSharp.Describe();
+
+        BookLibrary library = new BookLibrary(10);
+        library.Add(zeSharp);
+        library.CountBooks();
+        library.FindBook("C#").Describe();
+
+        Buch buch2 = new Buch("HoHoHo!");
+        library.Add(buch2);
+        Console.WriteLine(library.CountBooks());
     }
 }
