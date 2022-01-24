@@ -1,9 +1,13 @@
-﻿public class DreieckKlasse
+﻿public class DreieckKlasse : IShape
 {
     //Fields / Instanzattribute
     private double SideA;
     private double SideB;
     private double SideC;
+
+    //Properties
+
+    public string Name { get;}
 
     //Konstruktoren
 

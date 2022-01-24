@@ -95,7 +95,7 @@ public class SpassmitKlassen
         Buch zeSharp = new Buch("C#",new string[] { "Felix", "Karl", "Maria" },1500,"Programmierung",BookMedium.Hardcover,"9-85264713","Superbuch");
         zeSharp.Describe();
 
-        BookLibrary library = new BookLibrary(10);
+        BetterBookLibrary library = new BetterBookLibrary();
         library.Add(zeSharp);
         library.CountBooks();
         library.FindBook("C#").Describe();
@@ -103,5 +103,18 @@ public class SpassmitKlassen
         Buch buch2 = new Buch("HoHoHo!");
         library.Add(buch2);
         Console.WriteLine(library.CountBooks());
+
+        TitleFilter filtaa = new TitleFilter("C#");
+        Console.WriteLine(library.FindBook(filtaa));
+
+        filtaa.Title = "HoHoHo!";
+        Console.WriteLine(library.FindBook(filtaa));
+
+        library.RemoveBook(buch2);
+        AuthorFilter filtaB = new AuthorFilter("Felix");
+        library.FindBook(filtaB).Describe();
+
+
+
     }
 }
