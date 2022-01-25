@@ -5,10 +5,23 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-public class RechteckKlasse
+public class RechteckKlasse : IShape
 {
     private double Width;
     private double Height;
+
+    // Property:
+
+    public string Name => "Rechteck";
+
+
+    // Konstruktor:
+
+    public RechteckKlasse(double width, double height)
+    {
+        this.Width = width;
+        this.Height = height;
+    }
 
 
     public void Describe()

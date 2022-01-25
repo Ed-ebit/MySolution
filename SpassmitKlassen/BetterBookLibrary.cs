@@ -39,6 +39,20 @@
         }
         return null;
     }
+
+    // Suche über Delegate function
+
+    public Buch? FindBook (BuchFilter filter)
+    {
+        foreach ( Buch sample in this.Buecher)
+        {
+            if (filter(sample) == true)
+            {
+                return sample;
+            }
+        }
+        return null;
+    }
     public Buch? FindBook(string title)
     {
         foreach (Buch? buch in this.Buecher)

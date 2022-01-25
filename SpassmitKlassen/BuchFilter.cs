@@ -2,17 +2,9 @@
 // gibt als Ergebnis 'true' zurück, wenn das Buch auf den Filter
 // passt, ansonsten False -> muss einen bool zurückgeben
 // Bsp-Filter
-//public bool FilterById(Buch sample, Guid id)
-//{
-//    return sample.EindID == id;
-//}
+// Delegates: man kann eine Methode als Datentyp deklarieren, damit kapseln und diese
+// wie ein Objekt behandeln.
 
-//public bool FilterByTitle(Buch sample, string title)
-//{
-//    return sample.Titel.Equals(title, StringComparison.CurrentCultureIgnoreCase);
-//}
-
-//public bool FilterByAuthor(Buch sample, string author)
-//{
-//    return sample.Authors.Contains(author);
-//}
+//Ein Delegate wird als Methodensignatur definiert.
+//Der Name der "Methode" ist der Name des Delegate-Typs (ähnlich 'Funktionszeiger' in anderen Sprachen)
+public delegate bool BuchFilter(Buch sample);

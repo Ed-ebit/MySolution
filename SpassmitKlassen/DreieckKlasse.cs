@@ -7,18 +7,20 @@
 
     //Properties
 
-    public string Name { get;}
+    public string Name { get; }
 
     //Konstruktoren
 
     public DreieckKlasse(double a, double b, double c)
     {
         SetLengths(a, b, c);
+        this.Name = "Dreieck";
     }
 
     public DreieckKlasse(double length)
     {
         SetLengths(length, length, length);
+        this.Name = "Dreieck";
     }
 
     //Statische Methoden
@@ -45,7 +47,7 @@
     public void Describe()
     {
         Console.WriteLine("Ich bin ein Dreieck Namens {0}, meine Fläche ist {1}, mein Umfang {2}, " +
-            "Seitenlängen: a = {3}, b = {4}, c = {5}",this, this.GetArea(), this.GetPerimeter(), SideA, SideB, SideC);
+            "Seitenlängen: a = {3}, b = {4}, c = {5}", this, this.GetArea(), this.GetPerimeter(), SideA, SideB, SideC);
         //Console.WriteLine("Bin ich rechtwinklig? {0}", this.IsRightAngled());
     }
 

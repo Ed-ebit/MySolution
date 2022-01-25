@@ -1,7 +1,11 @@
 ﻿using Utility;
-public class BessereKreisKlasse
-    //erbt Methoden von System.Object automatisch
+public class BessereKreisKlasse : IShape
+//erbt Methoden von System.Object automatisch
 {
+
+    // Property mit IMPLIZITEM Getter
+
+    public string Name => "Kreis";
 
     //Instanzattribbut ("Objektattribut") für den radius:
     private double _Radius;// private: nur innerhalb der Klasse sichtbar. public: überall sichtbar, innerhalb der kompletten Assembly
@@ -19,6 +23,11 @@ public class BessereKreisKlasse
 
     }
 
+    public BessereKreisKlasse(double value)
+    {
+        this._Radius = value;
+    }
+
     // statische Methode ("Klassenmethode"), kann nicht auf Objekte (objekt.methode) aufgerufen werden:
     public static void PrintMetadata() 
     {
@@ -32,7 +41,7 @@ public class BessereKreisKlasse
         Console.WriteLine("Mein Radius ist {0}", this._Radius);
 
 
-        Console.WriteLine("Durchmesser: {0:0.00}, Umfang: {1:0.00}, Fläche: {2:0.00}", this.GetDiameter(), this.GetCircumference(), this.GetArea()); // .toString(0.00) rundet korrekt
+        Console.WriteLine("Durchmesser: {0:0.00}, Umfang: {1:0.00}, Fläche: {2:0.00}", this.GetDiameter(), this.GetPerimeter(), this.GetArea()); // .toString(0.00) rundet korrekt
     }
 
     public double GetArea()
@@ -41,7 +50,7 @@ public class BessereKreisKlasse
         return this._Radius * this._Radius * Math.PI;
     }
 
-    public double GetCircumference()
+    public double GetPerimeter()
     {
         // U = 2* PI * r
         return this._Radius * 2 * Math.PI;

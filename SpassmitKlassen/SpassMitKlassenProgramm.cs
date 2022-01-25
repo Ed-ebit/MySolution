@@ -1,5 +1,5 @@
 ﻿using Utility;
-public class SpassmitKlassen
+public class SpassMitKlassenProgramm
 {
     public static void MainGeometrie()
     {
@@ -48,9 +48,7 @@ public class SpassmitKlassen
         // Neu: Rechteck
         Console.WriteLine();
 
-        RechteckKlasse einRechteck = new RechteckKlasse();
-        einRechteck.SetHeight(10);
-        einRechteck.SetWidth(15);
+        RechteckKlasse einRechteck = new RechteckKlasse(10,15);
 
         einRechteck.Describe();
 
@@ -92,7 +90,7 @@ public class SpassmitKlassen
         // Titel, Autoren (stringarray),Seitenzahl, Sachgebiet, Medium (enum - hardcov, softc, ebook, audiobook)
         //ISBN (globale Eindeutigkeit, aber nicht exemplareindeutigkeit , Zusatzinfos
 
-        Buch zeSharp = new Buch("C#",new string[] { "Felix", "Karl", "Maria" },1500,"Programmierung",BookMedium.Hardcover,"9-85264713","Superbuch");
+        Buch zeSharp = new Buch("C#",new string[] { "Felix", "Karl", "Maria" },1500,"Programmierung",BookMedium.Audiobook,"9-85264713","Superbuch");
         zeSharp.Describe();
 
         BetterBookLibrary library = new BetterBookLibrary();
@@ -103,6 +101,8 @@ public class SpassmitKlassen
         Buch buch2 = new Buch("HoHoHo!");
         library.Add(buch2);
         Console.WriteLine(library.CountBooks());
+
+        //Filter
 
         TitleFilter filtaa = new TitleFilter("C#");
         Console.WriteLine(library.FindBook(filtaa));
@@ -115,6 +115,80 @@ public class SpassmitKlassen
         library.FindBook(filtaB).Describe();
 
 
+        List<IShape> shapes = new List<IShape>();
+        BessereKreisKlasse aCircle = new BessereKreisKlasse(6);
+        shapes.Add(aCircle);
+        shapes.Add(new DreieckKlasse(5));
+        shapes.Add(new RechteckKlasse(10,15));
+        PrintGeometricShapes(shapes);
 
+        // Delegates: man kann eine Methode als Datentyp deklarieren, damit kapseln und diese
+        // wie ein Objekt behandeln. siehe Buchfilter
+        FunnyDelegates();
+
+        //und nochmal Suche via Delegates, über eine in Bibliothek ausgelagerte Methode, die dann das Buchexemplar zurückgeben kann
+        Buch? findeBuch = library.FindBook(FilterByAudiobook);
+
+
+        //Lambdafunktionen:
+        //Sind kleine, on the fly erzeugte Funktionen ohne Namen, die ich nicht oft brauche und mal
+        //eben so mit reinhacke (aka 'dynamisch erzeugt', existiert nach ihrem Aufruf nicht mehr)
+        // Oft genutzt um schnell mal zu filtern, etc pp.
+        // Syntax: Parameter => Rumpf
+        // Bsp: Aus Buch? findeBuch = library.Findbook(FilterByAudiobook); wird:
+        findeBuch = library.FindBook(sample => sample.SachGebiet == "Programmierung");
+        // Achtung: Lambdafunktion benötigt Delegate-Datentyp,
+        // dazu gibts auch vordefinierte delegate-Datentypen :D -
+        // Bsp. Func<T> - ist Datentyp, der Parameterlose Methoden kapseln kann
+        Func<string> lambda = () => "HelloWorld"; // (): keine Parameter, wird einfach HelloWorld in String geschrieben
+        Console.WriteLine(lambda());
+        // Bsp. Action<T> ist eine Delegate-Typ der Methoden Kapseln kann,
+        // die nichts zurückgeben, aber einen Parameter vom Typ T haben.
+        Action<string> action = s => Console.WriteLine(s);
+        action("Hello");
+
+
+
+
+    }
+    public static void PrintGeometricShapes(ICollection<IShape> shapes)
+    {
+        foreach (IShape shape in shapes)
+        {
+            Console.WriteLine($"N={shape.Name} A={shape.GetArea():N2} P={shape.GetPerimeter():N2}");
+        }
+    }
+
+    public static void FunnyDelegates()
+    {
+        // Das Delegate-Objekt filter zeigt auf die Methode Program.FilterByAudiobook 
+        // Wenn wir filter callen, läuft die Methode ab.
+        // Dann können wir noch ne Methode in dieselbe Variable hängen -
+        // Die Methoden werden beim Variablencall dann hintereinander ausgeführt
+        BuchFilter? filter = FilterByAudiobook;
+        filter += FilterBySachgebiet;
+
+        //aber Achtung: return value ist die der zuletzt ausgeführten Funktion,
+        //nicht eine Mischung Der Ergebnisse oder sowas. Für unsere Bools eher ungeeigneter Usecase.
+
+        Buch cSharp = new Buch("C#", new string[] { "Felix", "Karl", "Maria" }, 1500, "Programmierung", BookMedium.Audiobook, "9-85264713", "Superbuch");
+
+        // Mithilfe eines Delegate-Objektes können wir eine andere
+        // Methode bzw. mehrere Methoden nacheinander aufrufen
+        bool result = filter(cSharp);
+
+        //Sehr beliebt bei Eventhandlern in GUIs, z.B. Buttonklick:
+        //löst mehrere Events aus die abgearbeitet werden müssen
+    }
+
+
+    public static bool FilterByAudiobook(Buch sample)
+    {
+        return sample.Medium == BookMedium.Audiobook;
+    }
+
+    public static bool FilterBySachgebiet (Buch s)
+    {
+        return s.SachGebiet == "Programmierung";
     }
 }
