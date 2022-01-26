@@ -65,19 +65,21 @@
     }
 
     public static void Main()
-
-    //Übung:
-    // Alles via query:
-    //Ausgehend von Wortliste, erzeuge Abfrage und gib aus:
-    //-Alle Zeilen, die mit b oder B beginnen
-    //-Alle Zeilen, deren Länge mind. 10 Zeichen beträgt
-    //-Nimm die letzten 5 Zeilen und gebe in Kleinbuchstaben aus
-    //-Alle Zeilen mit mind. einem Vokal
-    //- alle Zeilen, die mit y&x beginnen jeweils rückwärts
-    // - alle zeilen, die nur aus vokalen bestehen
-    //- jede zeile und ihre länge
-    //-alle zeilen beginnend mit b und endend mit e
     {
+        //Übung:
+        // Alles via query:
+        //Ausgehend von Wortliste, erzeuge Abfrage und gib aus:
+        //-Alle Zeilen, die mit b oder B beginnen
+        //-Alle Zeilen, deren Länge mind. 10 Zeichen beträgt
+        //-Nimm die letzten 5 Zeilen und gebe in Kleinbuchstaben aus
+        //-Alle Zeilen mit mind. einem Vokal
+        //- alle Zeilen, die mit y&x beginnen jeweils rückwärts
+        // - alle zeilen, die nur aus vokalen bestehen
+        //- jede zeile und ihre länge
+        //-alle zeilen beginnend mit b und endend mit e
+        //- alle Zeilen, die nur aus unterschiedlichen Buchstaben bestehen
+        // zeilen 11-20 ausgeben
+
         Console.WriteLine("Filterprogramm Übung:");
         string[] lines = File.ReadAllLines(@"data\wortliste.txt");
         //1
@@ -93,13 +95,82 @@
         List<string> results3 = query3.ToList();
         results3.ForEach(r => Console.WriteLine(r));
         //4
-        var query4 = lines.Where(r => { string rl = r.ToLower(); return rl.Contains('a') || rl.Contains('e'); } );
+        var query4 = lines.Where(r => { string rl = r.ToLower(); return rl.Contains('a') || rl.Contains('e'); });
+        List<string> results4 = query4.ToList();
+        results4.ForEach(r => Console.WriteLine(r));
         //geht auch schöner!
+        IEnumerable<string> query5 = lines.Where(r => r.ToLower().Contains('a') || r.ToLower().Contains('e') || r.ToLower().Contains('i') || r.ToLower().Contains('o') || r.ToLower().Contains('u'));
+        List<string> results5 = query5.ToList();
+        results5.ForEach(r => Console.WriteLine(r));
+
+        // nochmal:
+        //IEnumerable<string> query6 = lines.Where(l => l.ToLower().Any(c => "aeiou".Contains(c)));
         //5
+
         //6
         //7
         //8
+        //9
+
+        // Abfragen unter Einsatz von Linq -- für alle Datentypen, die Enumerable Interface nutzen
+        // Language integrated Query (dasselbe Zeug, etwas andeere Syntax
+        // 1. Alle Zeilen, die mit y oder x beginnen
+        var queryL = from l in lines
+                             let lToLower = l.ToLower()
+                             where lToLower.StartsWith('x') || lToLower.StartsWith('y')
+                             select l;
+        queryL.ToList().ForEach(s => Console.WriteLine(s));
+
+        // 2. alle zeilen die mit x beginnen, nach zeilenlänge absteigend sortiert
+
+        IEnumerable<string>  queryL1 = from l in lines
+                    let lToLower = l.ToLower()
+                    where lToLower.StartsWith('x')
+                    orderby lToLower.Length descending
+                    select l;
+        query1.ToList().ForEach(s => Console.WriteLine(s));
+
+        // 3. alle zeilen, die mit x beginnen jeweils rückwärts ausgegeben
+        var queryL2 = from l in lines
+                      where l.ToLower().StartsWith('x')
+                      select string.Join("", l.Reverse());// Reverse gibt einzelne chars zurück, daher wieder zu string joinen
+        queryL2.ToList().ForEach(s => Console.WriteLine(s));
+
+        // 4. erster und letzter buchstabe aller zeilen, die mit x beginnen
+        // es soll select new {} zur erzeugung eines neuen anonymen Datentyps für das Ergebnis genutzt werden
+        // 5.alle zeilen nach endbuchstaben gruppieren, anzahl zeilen pro gruppe,
+        // Durchschnitt anzahl zeichen pro zeile pro gruppe
+
+
+
+
+        // koppeln von Wörtern 'Linq-Join': alle wörter der Liste, die mit CE beginnen koppeln mit Wörtern, die auf CE enden.
+
+        //var queryJ = from l in lines
+        //             join l2 in lines on 
+        //             l.Take(2) equals l2.TakeLast(2)  hier würden nur die Referenzen verglichen, nicht die Zeichenketten :(
+        //deshalb:
+        var queryJ = from l in lines
+                     join l2 in lines on
+                     string.Join("", l.Take(2)) equals string.Join("", l2.TakeLast(2)) into lineJoin
+                     select new
+                     {
+                         Line = lines,
+                         AssociatedLines = lineJoin
+                     };
+
+        foreach (var mapping in queryJ)
+        {
+            Console.WriteLine(mapping.Line);
+            foreach (string associatedLine in mapping.AssociatedLines)
+            {
+                Console.WriteLine($"-> {associatedLine}");
+            }
         }
+
+
+
+    }
 
     public static bool FilterByA (string s)
     {
