@@ -15,6 +15,8 @@ public class NewsAgency
             //Callen der Subscriber
             NewNews.Invoke(news);
         }
+        // das if oben brauch man immer, deshalb verk. Schreibweise mit "Elvis Operator":
+        NewNews ?. Invoke(news);// wenn NewNews nicht Null ist, Invoke
     }
 
     public NewsAgency()
