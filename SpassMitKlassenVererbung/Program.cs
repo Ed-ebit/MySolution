@@ -15,6 +15,11 @@ public class Program
         files.Add(rich);
         files.Add(img);
         PrintFiles(files);
+
+        file.Remove();
+        //img.Remove();
+        img.SetDimensions(50, 100);
+        Console.WriteLine(img.Describe());
     }
 
     public static void PrintFiles(IEnumerable<BaseFile> files)

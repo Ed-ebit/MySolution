@@ -8,7 +8,8 @@
 
     //Constructor
 
-    public RasterImageFile(string path) : base(path)
+    public RasterImageFile(string path) : base(path) // hat die Basisklasse einen Parameterlosen Konstruktor,
+                                                     // kann man sich das :Base sparen
     {
         PixelHeight = 20;
         PixelWidth = 20;
@@ -16,10 +17,17 @@
         ColorSpace = ColorSpace.RGB;
     }
 
+    // ObjektMethoden
+
+    public void SetDimensions(int width, int height)
+    {
+        this.PixelWidth = width;
+        this.PixelHeight = height;
+    }
     public override string Describe()
     {
         string describe = base.Describe();
-        return $"{describe}\n Pixel-Höhe: {this.PixelHeight}, Weite: {this.PixelWidth}\n" +
-            $"Verlust: {this.IsLossLess}, Color Space: {this.ColorSpace}";
+        return $"{describe}Pixel-Höhe: {this.PixelHeight}, Weite: {this.PixelWidth}\n" +
+            $"Verlust: {this.IsLossLess}, Color Space: {this.ColorSpace}\n";
     }
 }

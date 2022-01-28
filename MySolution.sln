@@ -15,7 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestUtilities", "TestUtilit
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpassmitKlassen", "SpassmitKlassen\SpassmitKlassen.csproj", "{96152CDC-DE87-4597-A221-4182B9137CEA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpassMitKlassenVererbung", "SpassMitKlassenVererbung\SpassMitKlassenVererbung.csproj", "{B6901790-A6CD-401F-ABB6-570B2F840572}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpassMitKlassenVererbung", "SpassMitKlassenVererbung\SpassMitKlassenVererbung.csproj", "{B6901790-A6CD-401F-ABB6-570B2F840572}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReferenceVsValueTypes", "ReferenceVsValueTypes\ReferenceVsValueTypes.csproj", "{68AF9F7C-EFB2-497E-A32C-753A5C069BF0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{B6901790-A6CD-401F-ABB6-570B2F840572}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B6901790-A6CD-401F-ABB6-570B2F840572}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B6901790-A6CD-401F-ABB6-570B2F840572}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68AF9F7C-EFB2-497E-A32C-753A5C069BF0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68AF9F7C-EFB2-497E-A32C-753A5C069BF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68AF9F7C-EFB2-497E-A32C-753A5C069BF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68AF9F7C-EFB2-497E-A32C-753A5C069BF0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
