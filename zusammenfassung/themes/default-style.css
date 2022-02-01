@@ -1,0 +1,56 @@
+@font-face {
+    font-family: "Rubik";
+    src        : url("../fonts/rubik-font/static/Rubik-Light.ttf") format("truetype");
+}
+
+body {
+    max-width  : none;
+    font-family: "Segoe UI";
+    line-height: 1.5;
+}
+
+h1.title {
+    text-transform: uppercase;
+}
+
+h1:not(.title) {
+    border-width: 0 0 1px 0;
+    border-style: solid;
+    border-color: black;
+}
+
+tr.header {
+    background-color: lightgray;
+    border          : 1px solid black;
+}
+
+
+tbody {
+    border-collapse : collapse;
+    background-color: ghostwhite;
+    border          : 1px solid black;
+}
+
+img {
+    border          : 1px solid lightgray;
+    padding         : 10px;
+    background-color: ghostwhite;
+}
+
+/* Inline-Code-Blöcke sind in einem Code-Element ohne Class-Attribut enthalten */
+code:not(.sourceCode) {
+    color      : #171717;
+    background-color: #e6e6e6;
+    font-weight: normal;
+    border-radius: 3px;
+    padding: 3px 1px 3px 1px;
+}
+
+/* Code-Blöcke sind in einem pre-Element mit Class sourceCode enthalten */
+pre.sourceCode {
+    border-width    : 1px;
+    border-style    : solid;
+    border-color    : gray;
+    background-color: ghostwhite;
+    padding         : 10px;
+}

@@ -54,6 +54,7 @@
 
         Console.WriteLine($"{mySize.Width} {mySize.Height}");
         Console.WriteLine($"{otherSize.Width} {otherSize.Height}");
+        
 
     }
     
@@ -61,4 +62,7 @@
     {
         return guid1;
     }
+
+
+
 }

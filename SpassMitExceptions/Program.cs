@@ -41,23 +41,28 @@
         string pfad = Console.ReadLine();
         try
         {
-            TryReadLines(pfad);
+            IEnumerable<string> ausgabe = TryReadLines(pfad);
+            foreach (string s in ausgabe)
+            {
+                Console.WriteLine(s);
+            }
         }
         catch(FileNotFoundException e)
         {
-
+            Console.WriteLine("Datei nicht gefunden");
+            
         }
         catch(UnauthorizedAccessException e)
         {
-
+            Console.WriteLine(" Kein Zugriffsrecht auf Datei");
         }
         catch(Exception e)
         {
-            
+            Console.WriteLine("Unbekannter Fehler");
         }
         finally
         {
-
+            Console.WriteLine("Finale aktiviert");
         }
 
     }
@@ -116,7 +121,7 @@
         }
     }
 
-    public static IEnumerable<string>? TryReadLines(string pfad)
+    public static IEnumerable<string> TryReadLines(string pfad)
     {
         IEnumerable<string> text = File.ReadAllLines(pfad);
         return text;

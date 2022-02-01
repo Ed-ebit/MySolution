@@ -1,0 +1,37 @@
+from: markdown
+to: html
+verbosity: INFO
+
+output-file: zusammenfassung.html
+input-files:
+  - zusammenfassung.md
+
+filters:
+  - averms-pandoc-filters/dist/code-includes.lua
+  - toc-css/toc-css.lua
+  - averms-pandoc-filters/dist/standard-code.lua
+
+include-after-body:
+  - scripts/include-prism.txt
+
+standalone: true
+self-contained: false
+
+toc: true
+
+css:
+  - themes/default-style.css
+  - themes/prism-coy.css
+
+metadata:
+  title: Zusammenfassung "C# und .NET"
+  toc-title: Inhaltsverzeichnis
+  date: 2022-01-28
+  lang: de
+  author: 
+    - Kevin Schenker
+  mainfont: Calibri
+  monofont: Consolas
+  document-css: true
+
+

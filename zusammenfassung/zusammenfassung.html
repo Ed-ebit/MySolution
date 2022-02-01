@@ -1,0 +1,1402 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Kevin Schenker" />
+  <meta name="dcterms.date" content="2022-01-28" />
+  <title>Zusammenfassung &quot;C# und .NET&quot;</title>
+  <style>
+    html {
+      line-height: 1.5;
+      font-family: Calibri;
+      font-size: 20px;
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 1em;
+      }
+    }
+    @media print {
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Consolas;
+      font-size: 85%;
+      margin: 0;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="themes/default-style.css" />
+  <link rel="stylesheet" href="themes/prism-coy.css" />
+   
+  <!-- CSS added by filter 'toc-css.lua' for TOC hovering to the side -->
+  <style>
+  body {
+    padding-left: 1cm;
+    padding-right: 1cm;
+    transition: 0.5s;
+  }
+  nav {
+    width: 1em;
+    margin-left: -1cm;
+    font-size: smaller;
+    color: grey;
+    transition: 0.5s;
+    float: left;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    white-space: nowrap; 
+    overflow: hidden;
+    overflow-y: scroll;
+    transition: 0.5s;
+  }
+  nav::-webkit-scrollbar {
+    display: none;
+  }
+  nav a, nav a:visited {
+    color: grey;
+  }
+  nav h2:before {
+    content: "≡ ";
+    font-size: 150%;
+  }
+  nav h2:after {
+    content: " ◂";
+  }
+  nav li {
+    margin-left: -0.5em;
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  nav li > a:not(:only-child):before {
+    content: "▸ ";
+  }
+  nav li > a:only-child {
+    margin-left: 0.75em;
+  }
+  nav li li {
+    margin-left: 1em;
+  }
+  nav li li li {
+    margin-left: -0.5em;
+    font-size: smaller;
+  }
+  nav ul li ul  {
+    visibility: hidden;
+    display: none;
+    margin-top: 0.2em;
+    margin-bottom: 0.2em;
+    transition: 0.5s;
+  }
+  .paddingleft {
+    padding-left: 9cm;
+    transition: 0.5s;
+  }
+  .navside {
+    width: 7cm;
+    margin-left: -8.5cm;
+    padding-right: 1cm;
+    transition: 0.5s;
+  }
+  .navside h2:after {
+    content: " ▸";
+  }
+  .navshown {
+    width: 50%;
+    transition: 0.5s;
+    background-color: rgba(255, 255, 255, 0.95);
+  }
+  .subShow > ul {
+    visibility: visible;
+    display: block;
+    transition: 0.5s;
+    margin-left: -1em;
+  }
+  .subShow > a:not(:only-child):before {
+    content: "▾ ";
+  }
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Zusammenfassung "C# und .NET"</h1>
+<p class="author">Kevin Schenker</p>
+<p class="date">2022-01-28</p>
+</header>
+<nav id="TOC" role="doc-toc">
+<h2 id="toc-title">Inhaltsverzeichnis</h2>
+<ul>
+<li><a href="#was-ist-.net">Was ist .NET</a></li>
+<li><a href="#wozu-brauchen-wir-datentypen">Wozu brauchen wir
+Datentypen</a></li>
+<li><a href="#primitive-elementare-datentypen">Primitive / Elementare
+Datentypen</a></li>
+<li><a href="#operatoren">Operatoren</a></li>
+<li><a
+href="#zeichenkettenverarbeitung">Zeichenkettenverarbeitung</a></li>
+<li><a href="#eindimensionale-arrays-datenfelder">Eindimensionale Arrays
+(Datenfelder)</a></li>
+<li><a href="#rechteckige-mehrdimensionale-arrays">Rechteckige,
+mehrdimensionale Arrays</a></li>
+<li><a href="#arrays-von-arrays-jagged-arrays-verzweigte-arrays">Arrays
+von Arrays (Jagged Arrays / Verzweigte Arrays)</a></li>
+<li><a href="#kontrollstrukturen">Kontrollstrukturen</a></li>
+<li><a href="#datetime-datum-und-zeit">DateTime (Datum und
+Zeit)</a></li>
+<li><a href="#klassen">Klassen</a>
+<ul>
+<li><a href="#syntax">Syntax</a></li>
+<li><a href="#properties">Properties</a></li>
+<li><a href="#vererbung">Vererbung</a></li>
+<li><a href="#sichtbarkeits-zugriffsmodifizierer">Sichtbarkeits /
+Zugriffsmodifizierer</a></li>
+</ul></li>
+<li><a href="#interfaces-schnittstellen">Interfaces
+(Schnittstellen)</a></li>
+<li><a href="#enumerations-aufzählungstypen">Enumerations
+(Aufzählungstypen)</a></li>
+<li><a href="#delegates">Delegates</a></li>
+<li><a href="#lambdas">Lambdas</a></li>
+<li><a href="#events">Events</a></li>
+<li><a href="#language-integrated-query-linq">Language Integrated Query
+(LINQ)</a></li>
+<li><a
+href="#vergleich-von-wertetypen-value-types-mit-referenztypen-reference-types">Vergleich
+von Wertetypen (Value Types) mit Referenztypen (Reference
+Types)</a></li>
+<li><a href="#glossar">Glossar</a></li>
+</ul>
+</nav>
+<h1 id="was-ist-.net">Was ist .NET</h1>
+<ul>
+<li>.NET ist ein Ökosystem für die Entwicklung von Anwendungen. Dazu
+gehören:
+<ul>
+<li>eine Runtime (Laufzeitumgebung), die .NET Applikationen ausführt.
+Die Runtime macht u.a. folgendes:
+<ul>
+<li>die Ausführung bzw. das Laden von .NET Applikationen
+(<em>Assemblies</em>)</li>
+<li>Just-In-Time Compilation (d.h. IL Code wird in echten Maschinen-Code
+übersetzt)</li>
+<li>Ressourcenverwaltung (Speicher, Threads, Prozesse etc.)</li>
+<li>Garbage Collection (autom. Buchführung über reservierten Speicher
+und autom. Freigabe)</li>
+</ul></li>
+<li>eine Sammlung von Klassen-Bibliotheken (Base Class Library)</li>
+<li>eine Sammlung von .NET Programmiersprachen (C#, F#, VB.NET), die
+sich alle an einen offen Standard namens CLS (Common Language
+Specification) halten</li>
+<li>alle .NET Compiler erzeugen denselben Intermediate Language (IL)
+Code, d.h. Komponenten einer .NET Applikation lassen sich mit diversen
+Programmiersprachen entwicklen und miteinander integrieren</li>
+<li>Entwicklerdokumentation</li>
+<li>Build-System (es führt Buch über die Abhängigkeiten von
+Quelltextdateien und Komponenten und beschleunigt den
+Übersetzungsprozess, in dem es lediglich jene Quelltextdateien neu
+übersetzt, die direkt oder indirekt verändert worden). In .NET wird
+vorwiegend <em>MSBuild</em> eingesetzt.
+<ul>
+<li>andere Build-Systeme: CMake, Maven, GNU Make, Gulp, Grunt,
+Ninja</li>
+</ul></li>
+<li>Common-Type-System: eine Spezifikation für ein Typsystem
+<ul>
+<li>legt fest, welche Typen es gibt (Klassen, Interfaces, Enums,
+Delegates, Structs)</li>
+<li>legt fest, welche Byte-Größen Datentypen wie int und bool etc.
+haben</li>
+<li>legt fest, wie der Zugriff auf die Typen und deren Member erfolgt
+(z.B. Sichtbarkeitsspezifizierer wie public/private)</li>
+</ul></li>
+</ul></li>
+<li>es gibt mehrere sog. .NET Implementierungen. Zu einer .NET
+Implementierung gehören wie oben beschrieben: Compiler, Class Library,
+Runtime etc. Es existieren u.a. folgende .NET Implementierungen:
+<ul>
+<li>.Net Framework (nur für die Windows Plattform)</li>
+<li>.Net Core bzw. .Net 5+ (plattformübergreifende .Net Implementierung
+für Linux, Windows, MacOS etc.)</li>
+<li>Xamarin (Mobile App Development) bzw. Mono</li>
+</ul></li>
+</ul>
+<h1 id="wozu-brauchen-wir-datentypen">Wozu brauchen wir Datentypen</h1>
+<ul>
+<li>ein Datentyp definiert eine <em>Interpretation</em> für ein
+Bitmuster. Eine Folge von Nullen und Einsen könnte z.B. folgendermaßen
+interpretiert werden:
+<ul>
+<li>als ganze Zahl ggf. mit Vorzeichen</li>
+<li>als numerische Kodierungen von Zeichen (u.a Buchstaben, Ziffern,
+Sonderzeichen, Zeilenumbrüche)</li>
+<li>als Verkettungen von Zeichen (Zeichenketten)</li>
+<li>Gleitkommazahlen (also Zahlen mit Nachkommastellen)</li>
+<li>Wahrheitswerte wie wahr und falsch</li>
+<li>aus primitiven Datentypen (die oben genannten) lassen sich neue
+Datentypen ableiten
+<ul>
+<li>wir können unterschiedliche aber dennoch logisch zusammenhängende
+primitive Daten zu komplexeren Datenstrukturen zusammensetzen (z.B.
+Person, Array, Listen)</li>
+</ul></li>
+</ul></li>
+<li>ein Datentyp legt auch immer einen <em>Wertebereich</em> fest bzw.
+bestimmt er, welche Daten zulässig bzw. gültig sind. Bsp.: in eine
+Variable vom Datentyp Integer kann ich nur Zahlen speichern, aber keine
+Zeichenketten oder Gleitkommazahlen.</li>
+<li>Datentypen definieren die <em>Anzahl an Bytes</em>, die eine
+Variable dieses Datentyps im Speicher belegt.</li>
+<li>Datentypen legen (indirekt) fest, welche <em>Operationen</em> mit
+den Werten, die sie repräsentieren, durchgeführt werden können. Bsp:
+Zahlen lassen sich addieren, subtrahieren, potenzieren etc. Strings
+hingegen können aneinander gehangen werden, sie können groß und klein
+geschrieben werden etc.</li>
+</ul>
+<h1 id="primitive-elementare-datentypen">Primitive / Elementare
+Datentypen</h1>
+<ul>
+<li><code>int</code> für ganze Zahlen (bzw.
+<code>System.Int32</code>)</li>
+<li><code>float</code>, <code>double</code> für
+Hardware-Gleitkommazahlen (<code>System.Single</code> bzw.
+<code>System.Double</code>)
+<ul>
+<li>Achtung: Rundungsfehler können bei Berechnungen auftreten</li>
+<li>bei Float-Literalen <em>muss</em> der Suffix <code>F</code>
+verwendet werden</li>
+<li>bei Double-Literalen <em>kann</em> der Suffix <code>D</code>
+verwendet werden</li>
+</ul></li>
+<li><code>decimal</code> für Software-Gleitkommazahlen, allerdings
+basiert die interne Darstellung hier auf dem Dezimalsystem und nicht auf
+dem Binärsystem (Die Zahl <code>0.1</code> kann hier zum Beispiel exakt
+dargestellt werden.)
+<ul>
+<li>bei Literalen <em>muss</em> der Suffix <code>M</code> verwendet
+werden. Z.B. <code>1.25M</code>.</li>
+</ul></li>
+<li><code>string</code> für Zeichenketten
+(<code>System.String</code>)</li>
+<li><code>char</code> für ein Zeichen (<code>System.Char</code>)</li>
+<li><code>bool</code> für Wahrheitswerte
+(<code>System.Boolean</code>)</li>
+<li>um explizite Konvertierungen vorzunehmen, können wir zum Beispiel
+die Methoden der Klasse <code>System.Convert</code> verwenden.
+<ul>
+<li>Bsp.: Konvertierung von <code>string</code> in <code>int</code>
+mittels <code>Convert.ToInt32("123")</code></li>
+<li>Bsp.: Konvertierung von <code>int</code> in <code>string</code> mit
+<code>Convert.ToString(123)</code></li>
+<li>viele Datentypen haben eine <code>Parse</code> Methode, um einen
+String zu konvertieren</li>
+<li>jeder Datentyp hat eine <code>ToString</code> Methode, mit der sich
+ein Wert in einen String konvertieren lässt.</li>
+</ul></li>
+<li>einige wenige Typkonvertierungen nimmt der Compiler automatisch vor
+(<em>implizite Konvertierungen</em>). Jedoch nur dann, wenn kein
+Informationsverlust dabei entsteht. Z.b. ein Float kann problemlos in
+einen Double konvertiert werden.</li>
+</ul>
+<pre class="line-numbers"><code class="language-csharp">float f = 1.2F;
+double d = f; // implizite Konvertierung von Float nach Double
+decimal m = Convert.ToDecimal(d); // Explizite Konvertierung von double nach decimal!</code></pre>
+<h1 id="operatoren">Operatoren</h1>
+<ul>
+<li>Arithmetische Operatoren: <code>+,-,*,/,%</code>
+<ul>
+<li>Achtung: Dividieren wir nur Werte vom Datentyp <code>int</code>
+(d.h. beide Operanden des Divisionsoperators sind Integer), dann ist
+auch das Ergebnis vom Datentyp <code>int</code>. Die Nachkommastellen
+werden also <strong>abgeschnitten</strong> (keine Rundung).</li>
+</ul></li>
+</ul>
+<pre class="line-numbers"><code class="language-csharp">double quotient = 1 / 16; // quotient ist 0!
+double quotient = 1.0 / 16; // Funktioniert!</code></pre>
+<ul>
+<li>Logische Operatoren: <code>&amp;&amp;</code> (and), <code>||</code>
+(oder), <code>!</code> (not)
+<ul>
+<li>Hinweis: Die Priorität von <code>!</code> ist größer als die von
+<code>&amp;&amp;</code>.</li>
+<li>Hinweis: Die Priorität von <code>&amp;&amp;</code> ist größer als
+die von <code>||</code></li>
+</ul></li>
+</ul>
+<pre class="line-numbers"><code class="language-csharp">true || !false &amp;&amp; true
+// Obiger Ausdruck wird folgendermaßen ausgewertet
+// Ergebnis ist True
+(true || ((!false) &amp;&amp; true))</code></pre>
+<h1 id="zeichenkettenverarbeitung">Zeichenkettenverarbeitung</h1>
+<ul>
+<li>Strings sind unveränderlich (engl. <em>immutable</em>)</li>
+<li>wenn man Strings transformiert z.B. durch ToUpper, ToLower etc. dann
+erhält man immer nur eine Kopie</li>
+</ul>
+<pre class="line-numbers"><code class="language-csharp">&gt; &quot;abc&quot;.GetHashCode()
+1099313834
+&gt; &quot;abc&quot;.ToUpper()
+&quot;ABC&quot;
+&gt; &quot;aBC&quot;.ToLower()
+&quot;abc&quot;
+&gt; (1.2).ToString()
+&quot;1,2&quot;
+&gt; DateTime.Now
+[12.01.2022 10:10:57]
+&gt; &quot;abc;uvw&quot;.Split()
+string[1] { &quot;abc;uvw&quot; }
+&gt; &quot;abc;uvw&quot;.Split(&#39;;&#39;)
+string[2] { &quot;abc&quot;, &quot;uvw&quot; }
+&gt; &quot;   abc  &quot;.Trim()
+&quot;abc&quot;
+&gt; &quot;abc&quot;.Contains(&quot;bc&quot;)
+true
+&gt; &quot;abc&quot;.StartsWith(&quot;a&quot;)
+true
+&gt; &quot;abc&quot;.EndsWith(&quot;c&quot;)
+true
+&gt; string s = &quot;abcdefg&quot;;
+&gt; s
+&quot;abcdefg&quot;
+&gt; s[2]
+&#39;c&#39;
+&gt; s[-1]
+System.IndexOutOfRangeException: Der Index war außerhalb des Arraybereichs.
+  + string.get_Chars(int)
+&gt; s[6]
+&#39;g&#39;
+&gt; s[0]
+&#39;a&#39;
+&gt; &quot;abc;uvw-xyz&quot;.Split(&#39;;&#39;, &#39;-&#39;, &#39;_&#39;)
+string[3] { &quot;abc&quot;, &quot;uvw&quot;, &quot;xyz&quot; }
+&gt; string s = new String(&#39;x&#39;, 5);
+&gt; s
+&#39;xxxxx&#39;
+&gt; &quot;abc&quot;.Length
+3
+&gt; string.Concat(&quot;abc&quot;, &quot;uvw&quot;)
+&quot;abcuvw&quot;
+&gt; &quot;abc&quot; + &quot;uvw&quot;
+&quot;abcuvw&quot;
+&gt; string.Format(&quot;{0} ist cool&quot;, &quot;C#&quot;)
+&quot;C# ist cool&quot;
+&gt; string.Join(&quot;&quot;, &quot;abcd&quot;.Reverse());
+&quot;dcba&quot;
+&gt; string s = &quot;abc&quot;;
+&gt; string t = &quot;abc&quot;;
+&gt; object.ReferenceEquals(s,t)
+True
+&gt; string.Join(&#39;;&#39;, &quot;abc&quot;, &quot;defg&quot;, &quot;uvw&quot;)
+&quot;abc;defg;uvw&quot;</code></pre>
+<h1 id="eindimensionale-arrays-datenfelder">Eindimensionale Arrays
+(Datenfelder)</h1>
+<pre class="line-numbers"><code class="language-csharp">&gt; string[] names = { &quot;max&quot;, &quot;ute&quot;, &quot;ulli&quot; };
+&gt; names
+string[3] { &quot;max&quot;, &quot;ute&quot;, &quot;ulli&quot; }
+&gt; names.Length
+3
+&gt; names[0]
+&quot;max&quot;
+&gt; names[1]
+&quot;ute&quot;
+&gt; names[2]
+&quot;ulli&quot;
+&gt; int[] zahlen = new int[3] { 10, 5, 1 };
+&gt; zahlen
+int[3] { 10, 5, 1 }
+&gt; int[] primzahlen = new int[5];
+&gt; primzahlen
+int[5] { 0, 0, 0, 0, 0 }
+&gt; primzahlen[0] = 2;
+&gt; primzahlen[1] = 3;
+&gt; primzahlen[2] = 5;
+&gt; primzahlen[4] = 7;
+&gt; primzahlen[3] = 11;
+&gt; primzahlen
+int[5] { 2, 3, 5, 11, 7 }</code></pre>
+<h1 id="rechteckige-mehrdimensionale-arrays">Rechteckige,
+mehrdimensionale Arrays</h1>
+<pre class="line-numbers"><code class="language-csharp">&gt; int[,,] tabelle = new int[2, 3, 4] 
+{
+    { 
+        { 1,2,3,4 }, 
+        { 5,6,7,8 }, 
+        { 1,2,3,4 } 
+    },
+    { 
+        { 9,8,7,6 }, 
+        { 5,4,3,2 }, 
+        { 1,0,0,1 } 
+    },
+};
+&gt; tabelle.Length
+24
+&gt; tabelle.GetLength(0)
+2
+&gt; tabelle.GetLength(1)
+3
+&gt; tabelle.GetLength(2)
+4</code></pre>
+<h1 id="arrays-von-arrays-jagged-arrays-verzweigte-arrays">Arrays von
+Arrays (Jagged Arrays / Verzweigte Arrays)</h1>
+<pre class="line-numbers"><code class="language-csharp">// tabelle ist ein eindimensionaler Array, dessen
+// Elemente den Datentyp int[] haben. Die Elemente sind
+// also selbst Arrays.
+// Der Array tabelle speichert lediglich Objektreferenzen
+// auf zwei Array-Objekte. Diese beiden Array-Objekte müssen
+// separat erzeugt werden.
+&gt; int[][] tabelle = new int[2][];
+&gt; tabelle[0] = new int[] {1,2,3}; 
+&gt; tabelle[1] = new int[] {9,8,7,6,5,4};
+&gt; tabelle[0].Length
+3
+&gt; tabelle[1].Length
+6
+&gt; tabelle[1][2]
+7
+&gt; tabelle.GetLength(0)
+2
+&gt; tabelle.GetLength(1) // Fehler: tabelle ist eindimensional!
+System.IndexOutOfRangeException: Der Index war außerhalb des Arraybereichs.
+  + System.Array.GetLength(int)</code></pre>
+<h1 id="kontrollstrukturen">Kontrollstrukturen</h1>
+<ul>
+<li>foreach-Schleife: Hiermit lassen sich die Elemente einer
+<em>Datentreihe</em> elementweise durchlaufen. Zum Beispiel Arrays,
+Strings, Listen etc.
+<ul>
+<li>Hinweis: Die Elemente können mit diesem Schleifentyp nicht ersetzt
+werden.</li>
+<li>Hinweis: Elemente lassen sich in den meisten Fällen nicht in einer
+foreach-Schleife entfernen</li>
+</ul></li>
+</ul>
+<pre class="line-numbers"><code class="language-csharp">foreach (ElementDatentyp e in Datenreihe)
+{
+    // e ist Bezeichner für das aktuell betrachtete Element
+    // e ist eine _Kopie_ des aktuellen Elements!!!
+}
+
+// Gibt &#39;z e i c h e n k e t t e&#39; aus
+// Hinweis: Die Elemente eines Strings sind Chars
+foreach (char zeichen in &quot;zeichenkette&quot;)
+{
+    Console.Write($&quot;{zeichen} &quot;);
+}
+
+// Gibt aus &#39;1 2 3&#39;
+int[] zahlen = { 1, 2, 3 };
+foreach (int zahl in zahlen)
+{
+    Console.Write($&quot;{zahl} &quot;);
+}</code></pre>
+<ul>
+<li>if-Anweisung: Hiermit lassen sich Anweisungen <em>bedingt</em>
+ausführen</li>
+</ul>
+<pre class="line-numbers"><code class="language-csharp">if (bedingung1)
+{
+    // Anweisungsblock 1
+}
+else if (bedingung2)
+{
+    // Anweisungsblock 2
+    // !bedingung1 &amp;&amp; bedingung2
+}
+else
+{
+    // !bedingung1 &amp;&amp; !bedingung2
+}</code></pre>
+<ul>
+<li>switch-Anweisung: der Wert eines Berechnungsausdruckes wird
+nacheinander mit den <em>konstanten Werten</em> in den case-Labels
+verglichen. Sobald ein Vergleich wahr ist, wird der zum case zugehörige
+Anweisungsblock ausgeführt. Die <code>break</code> Anweisung verlässt
+die switch-Kontrollstruktur und springt zur nächsten Anweisung.</li>
+</ul>
+<pre class="line-numbers"><code class="language-csharp">// Gibt aus: &#39;Fehler ist 1 oder 3&#39;
+int errorCode = 3;
+int fileNotFound = 404;
+switch (errorCode)
+{
+    case 1: 
+        // Hier ist der Anweisungsblock leer, deshalb wird der
+        // Anweisungsblock für case 3 ausgeführt.
+    case 2:
+        Console.WriteLine(&quot;Fehler ist 1 oder 3&quot;);
+        break; // hier wird die Kontrollstruktur verlassen
+    case fileNotFound:
+        // Funktioniert nicht, da fileNotFound kein konstanter Wert ist
+        // (zur Kompilierzeit nicht berechnenbar bzw. bekannt)
+        break;
+    default:
+        Console.WriteLine(&quot;Unbekannter Fehler&quot;);
+        break;
+}
+// hier landen wir nach der break-Anweisung</code></pre>
+<ul>
+<li>for-Schleife: eine kopfgesteuerte Schleife (Bedingung wird vor
+erster Iteration geprüft)
+<ul>
+<li>Hinweis: Solange die Laufbedingung erfüllt ist (<code>true</code>),
+wird die Schleife durchlaufen. Ist sie erstmalig nicht erfüllt
+(<code>false</code>) wird die Schleife beendet.</li>
+</ul></li>
+</ul>
+<pre class="line-numbers"><code class="language-csharp">// Alle drei Blöcke im Kopf der Schleife sind optional
+// Die Semikola sind verpflichtend.
+// Iterationsanweisung wird nach jedem Schleifendurchlauf ausgeführt
+// noch bevor die Laufbedingung erneut geprüft wird.
+// Wird die Bedingung weggelassen, wird implizit True angenommen.
+for (&lt;initialisierung&gt; ; &lt;Laufbedingung&gt; ; &lt;Iterationsanweisung&gt;)
+{
+    // Schleifenrumpf
+
+    // mit der break Anweisung verlassen wir die Schleife sofort.
+    // Die Iterationsanweisung wird in diesem Fall nicht mehr ausgeführt.
+
+    // mit der continue Anweisung beenden wir den aktuellen Schleifendurchlauf.
+    // Hier wird direkt zur Iterationsanweisung gesprungen.
+    // Anschließend erfolgt eine neue Prüfung der Laufbedingung.
+    
+}
+</code></pre>
+<h1 id="datetime-datum-und-zeit">DateTime (Datum und Zeit)</h1>
+<pre class="line-numbers"><code class="language-csharp">&gt; DateTime.Today
+[20.01.2022 00:00:00]
+&gt; DateTime.Now
+[20.01.2022 08:27:59]
+&gt; DateTime.UtcNow
+[20.01.2022 07:28:48]
+&gt; DateTime.UtcNow.ToShortDateString()
+&quot;20.01.2022&quot;
+&gt; DateTime.UtcNow.ToString(&quot;d&quot;)
+&quot;20.01.2022&quot;
+&gt; DateTime.UtcNow.ToString(&quot;D&quot;)
+&quot;Donnerstag, 20. Januar 2022&quot;
+&gt; Console.Write(&quot;{0:D}&quot;, DateTime.Today);
+Donnerstag, 20. Januar 2022
+&gt; Console.Write(&quot;{0:d}&quot;, DateTime.Today);
+20.01.2022
+&gt; Console.Write(&quot;{0:MM.yyyy}&quot;, DateTime.Today);
+01.2022
+&gt; new DateTime(2000, 5, 20)
+[20.05.2000 00:00:00]
+&gt; DateTime.IsLeapYear(2000)
+true</code></pre>
+<h1 id="klassen">Klassen</h1>
+<ul>
+<li>repräsentieren logische Einheiten aus Attributen (Daten) und darauf
+arbeitenden Operationen (Verhalten)</li>
+<li>bieten zahlreiche Mechanismen, um Daten und Operationen zu schützen
+<ul>
+<li>Sichtbarkeitsmodifikation (z.B. <code>public</code> und
+<code>private</code>)</li>
+<li>read-only Zugriff per <code>readonly</code> oder Properties ohne
+Setter</li>
+</ul></li>
+<li>definieren den “Bauplan” für Objekte, die anhand dieser Klassen
+erzeugt werden.</li>
+<li>können zahlreiche Member aufweisen. Z.B.:
+<ul>
+<li>Fields (klassische Datenattribute)</li>
+<li>Properties (eine Art Mix aus Field und dazugehörigen Set und Get
+Funktionen)</li>
+<li>Methoden (stellen das Verhalten der Klasse dar)</li>
+<li>Events (informieren Abonennten über Zustandsveränderungen)</li>
+<li>Konstanten</li>
+<li>Indexer (erlaubt Zugriff per <code>[index]</code>)</li>
+<li>Konstruktoren (initialisiert neues Objekt)</li>
+<li>Destruktor (gibt Ressourcen eines Objekts frei)</li>
+<li>statischer Konstruktor (wird einmalig beim Laden der Klasse
+ausgeführt)</li>
+</ul></li>
+<li>statische Member gelten für die Klasse selbst</li>
+<li>Instanz-Member gelten pro Objekt</li>
+<li>können beliebig viele Interfaces implementieren / beerben</li>
+<li>können von maximal einer Klasse erben (Einfachvererbung)</li>
+</ul>
+<h2 id="syntax">Syntax</h2>
+<pre class="line-numbers"><code class="language-csharp">&lt;Sichtbarkeit&gt; class &lt;Klassenname&gt;
+{
+    // Definition der Klasse
+}
+
+// Erzeugen eines neuen Objektes mit Hilfe eines Konstruktors
+Klassenname variablenname = new Klassenname(argumente);
+// Aufruf einer Instanzmethode
+Objektreferenz.Instanzmethode(argumente)
+// Aufruf einer Klassenmethode
+Klassenname.Klassenmethode(argumente)</code></pre>
+<h2 id="properties">Properties</h2>
+<ul>
+<li>statt separate Getter und Setter Methoden für zu schützende
+Attribute zu schreiben, werden in C# üblicherweise Properties
+implementiert. Lese und Schreibzugriffe erfolgen dann nicht mehr durch
+separate GetProperty und SetProperty Methoden, sondern einfach per
+<code>objekt.property</code> Notation.</li>
+<li>Diese Zugriffsart ist konform zur Verwendung von herkömmlichen
+Attributen (Feldern), bietet aber dennoch zusätzliche Lese und
+Schreiblogik bzw. Zugriffssteuerung.</li>
+<li>für jedes Property kann definiert werden, ob es lesbar
+(<code>get</code>) und schreibbar (<code>set</code>) ist.
+<code>get</code> und <code>set</code> lassen sich außerdem in ihrer
+Sichtbarkeit einschränken. Es ist also u.a. möglich den Getter
+öffentlich verfügbar zu machen, den Setter aber privat zu
+deklarieren.</li>
+<li>Properties, die nur einen Getter (get) besitzen, können nur einmalig
+im Constructor der Klasse initialisiert und danach nicht mehr
+modifiziert werden.</li>
+<li>Nur schreibbare (set, aber kein get) Properties gibt es nicht.</li>
+</ul>
+<pre class="line-numbers"><code class="language-csharp">// Konventioneller Zugriff mit separaten Set und Get Methoden
+o.SetX(value);
+value = o.GetX();
+// Zugriff mit Properties
+o.X = value;
+value = o.X;
+// Syntax für Property-Definition
+&lt;Sichtbarkeit&gt; &lt;Datentyp&gt; &lt;Property-Name&gt;
+{
+    get
+    {
+        // Logik für Lesezugriff
+    }
+    set
+    {
+        // Logik für Schreibzugriff
+    }
+}</code></pre>
+<h2 id="vererbung">Vererbung</h2>
+<ul>
+<li>Terminologie:
+<ul>
+<li>Compile-Time-Type: Das ist der Datentyp einer Variable, so wie er
+zur Kompilierzeit angegeben wurde (z.B. <code>BaseFile</code> in der
+Definition <code>BaseFile? file = null</code>)</li>
+<li>Runtime-Type: Das ist der Datentyp, auf den eine Objektvariable
+während des Programmablaufs tatsächlich verweist (z.B. <code>file</code>
+zeigt auf ein Objekt vom Typ <code>RichTextFile</code>)</li>
+</ul></li>
+</ul>
+<pre class="line-numbers"><code class="language-csharp">// Compile-Time-Type ist &quot;BaseFile&quot;
+// Runtime-Type ist aber &quot;RichTextFile&quot;
+BaseFile file = new RichTextFile(&quot;pfad&quot;);
+
+// Compile-Time-Type ist &quot;ICollection&lt;string&gt;&quot;
+// Runtime-Type von &quot;collection&quot; ist aber &quot;List&lt;string&gt;&quot;
+ICollection&lt;string&gt; collection = new List&lt;string&gt;();</code></pre>
+<ul>
+<li>ein Aufruf der Form <code>anObject.Member</code> wird folgendermaßen
+aufgelöst:
+<ul>
+<li>es wird der Compile-Time-Type <code>CTT</code> von
+<code>anObject</code> ermittelt</li>
+<li>wenn <code>Member</code> in <code>CTT</code> <em>nicht</em> als
+<code>virtual</code> deklariert wurde, dann wird immer
+<code>CTT.Member</code> aufgerufen. Der Runtime-Type von
+<code>anObject</code> ist damit also unerheblich.</li>
+<li>wenn <code>Member</code> in <code>CTT</code> hingegen als
+<code>virtual</code> deklariert wurde,dann wird der Runtime-Type
+<code>RTT</code> von <code>anObject</code> ermittelt. Nun wird
+nacheinander in folgenden Klassen nach der “neusten Version” von
+<code>Member</code> gesucht:
+<ul>
+<li>in der Klasse <code>RTT</code></li>
+<li>in der Oberklasse von <code>RTT</code></li>
+<li>in der Oberklasse der Oberklasse von <code>RTT</code> usw.</li>
+</ul></li>
+<li>die “neuste Version”, die gefunden wird, wird dann aufgerufen.</li>
+<li>Bildlich gesprochen, wandert man ausgehend von <code>RTT</code>
+immer weiter nach oben in Richtung der Wurzelklasse bis man entweder
+eine überschriebene Version von <code>Member</code> findet oder bis man
+die erstmalige Definition von <code>Member</code> vorfindet.</li>
+</ul></li>
+<li>Hinweis: der Compile-Time-Type von <code>this</code> ist jene
+Klasse, in der das Schlüsselwort verwendet wird. Verwendet man also
+<code>this</code> in der Klasse <code>BaseFile</code>, so ist
+<code>BaseFile</code> der <code>CTT</code>. Aber auch hier kann der
+Runtime-Type von <code>this</code> eine Unterklasse von
+<code>BaseFile</code> sein!!</li>
+<li>Tipp: Vermeide es, <code>virtual</code> Methoden im Konstruktor
+aufzurufen. Problem: Ein Basisklassen-Konstruktor kann dadurch eine
+Methode einer seiner Unterklassen aufrufen, ohne dass das Objekt der
+Unterklasse schon vollständig initialisiert wurde.</li>
+<li>Vererbung sollte nur dann verwendet werden, wenn die Unterklasse
+eine sinnvolle Spezialisierung der Oberklasse ist. Die Beziehung
+“ist-ein” sollte erfüllt sein. Beispiel: ein ImageFile “ist-eine”
+Base-File. Gegenbeispiel: ein Motorrad ist kein Fahrrad, obwohl beide
+viel gemeinsam haben. Ein Motorrad ist allerdings ein Zweirad.</li>
+<li>vererbt werden alle Member der Oberklasse bis auf die
+Konstruktoren.</li>
+<li>eine Unterklasse hat die Möglichkeit Member der Oberklasse zu
+überschreiben. Dazu muss das Member aber als <code>virtual</code>
+deklariert sein. Trotz des Überschreibens eines Members, bleibt die
+ursprüngliche Definition in der Oberklasse erhalten! Die überschriebene
+Version ist nur für die überschreibende Klasse und deren Nachfahren
+wirksam.</li>
+<li>der Konstruktor einer Unterklasse muss immer <em>zuerst</em> einen
+Konstruktor der Oberklasse aufrufen. Gibt es in der Oberklasse einen
+parameterlosen Konstruktor, wird dieser automatisch aufgerufen, sofern
+kein expliziter Basiskonstruktor in der Unterklasse ausgewählt wird.
+<ul>
+<li>bildlich gesprochen, werden die Konstruktoren in der Hierarchie von
+“oben nach unten” aufgerufen bzw. die Objekte von “oben nach unten”
+initialisiert.</li>
+</ul></li>
+</ul>
+<pre class="line-numbers"><code class="language-csharp">public MyConstructor(someArguments) 
+    : base(someOtherArguments) // Aufruf des Basiskonstruktors
+{
+    // Initialisierung
+    // erfolgt erst nach der Initialisierung der Oberklasse
+}</code></pre>
+<h2 id="sichtbarkeits-zugriffsmodifizierer">Sichtbarkeits /
+Zugriffsmodifizierer</h2>
+<ul>
+<li><code>public</code>: für alle Klassen sichtbar</li>
+<li><code>internal</code>: für alle Klassen innerhalb derselben Assembly
+sichtbar</li>
+<li><code>private</code>: ausschließlich für die eigene Klasse
+sichtbar</li>
+<li><code>protected</code>: Ausschließlich sichtbar für
+Nachfahren-Klassen
+<ul>
+<li>Hinweis: ein Aufruf der Form <code>obj.ProtectedMember</code> in
+einer Klasse <code>C</code> ist genau dann zulässig, wenn <code>C</code>
+dem <em>Compile-Time-Typ</em> von <code>obj</code> entspricht oder eine
+Unterklasse dieses Typs ist. Diese Restriktion verhindert, dass
+<code>C</code> auf die Protected-Member seiner “Geschwister-Klassen”
+zugreifen und damit deren sichergestellte Invarianten umgehen kann. Eine
+Unterklasse sollte sich nur nach der internen Implementierung
+<em>einer</em> Oberklasse richten und sich nicht Gedanken darüber machen
+müssen, ob Geschwister-Klassen die aufgestellten Invarianten umgehen
+könnten.</li>
+</ul></li>
+</ul>
+<h1 id="interfaces-schnittstellen">Interfaces (Schnittstellen)</h1>
+<ul>
+<li>stellen eine Art Spezifikation oder Protokoll für andere Datentypen
+(insbesondere Klassen) dar.</li>
+<li>enthalten nur Member-Deklarationen (Signatur), aber keine
+Definitionen (Logik/Implementierung). Die Schnittstelle definiert also
+nur das <em>Was</em>, aber nicht das <em>Wie</em>.</li>
+<li>erlauben es, Code zu schreiben, der unabhängig von einer konkreten
+Implementierung / Datentyp ist, sondern lediglich auf eine allgemeine,
+flexible Schnittstelle zugreift. Der Code kann also mit vielen
+verschiedenen Implementierungen einer Schnittstelle arbeiten und die
+Wahrscheinlichkeit, dass dieser Code angepasst werden muss, sinkt damit
+enorm.</li>
+<li>ermöglichen Plugins</li>
+<li>beschreiben typischerweise Features eines Datentyps</li>
+<li>in .NET finden sich zahlreiche Interfaces, u.a.:
+<ul>
+<li><code>IEnumerable</code> (aufzählbare Dinge) und
+<code>ICollection</code> (Elementsammlungen)</li>
+<li><code>IList</code> (Zugriff per Index), <code>ISet</code> (Mengen),
+<code>IDictionary</code> (Schlüssel-Wert-Paare)</li>
+<li><code>IEquatable</code> (==) und <code>IComparable</code>
+(&lt;,&gt;,&gt;=,&lt;=)</li>
+<li><code>IDisposable</code> (erfordert Ressourcenfreigabe)</li>
+<li><code>ICloneable</code> (kopierbar)</li>
+</ul></li>
+</ul>
+<pre class="line-numbers"><code class="language-csharp">
+// IPrinter definiert eine Schnittstelle für Drucker
+public interface IPrinter
+{
+    // Properties (keine Logik)
+    bool IsReady { get; }
+
+    // Methoden (keine Logik)
+    PrintResult Print(Page p);
+    void Reset();
+    bool Clean();
+}
+
+public class InkPrinter : IPrinter
+{
+    // Muss Implementierung für IPrinter anbieten
+}
+
+public class LaserPrinter : IPrinter
+{
+    // Muss Implementierung für IPrinter anbieten
+}
+
+public class NeedlePrinter : IPrinter
+{
+    // Muss Implementierung für IPrinter anbieten
+}
+
+// Code, der nur von der Schnittstelle IPrinter abhängig ist
+// und mit allen Klassen arbeiten kann, die die Schnittstelle
+// IPrinter implementieren.
+public void PrintMail(IPrinter printer, string message)
+{
+    Page aPage = new Page(message);
+    
+    if (printer.IsReady)
+    {
+        printer.Print(aPage);
+    }
+}
+
+// Aufrufden der PrintMail Methode mit unterschiedlichen Objekten
+PrintMail(new LaserPrinter(), &quot;some message&quot;);
+PrintMail(new InkPrinter(), &quot;some other message&quot;);
+PrintMail(new NeedlePrinter(), &quot;yet another message&quot;);
+</code></pre>
+<h1 id="enumerations-aufzählungstypen">Enumerations
+(Aufzählungstypen)</h1>
+<ul>
+<li>definieren einen begrenzten Wertebereich und geben sowohl den
+einzelnen Werten als auch dem Wertebereich selbst einen deskriptiven
+Namen</li>
+<li>verbessern die Lesbarkeit des Codes, wenn viele Konstanten benötigt
+werden, die ansonsten nur als bloße Zahlen im Quellcode auftauchen
+würden.</li>
+<li>die Konstanten einer Enumeration werden intern als ganze Zahlen
+repräsentiert</li>
+</ul>
+<pre class="line-numbers"><code class="language-csharp">// Der Name des Wertebereichs ist Gender. Der Wertebereich
+// besteht aus den drei Konstanten namens Male, Female und Diverse.
+public enum Gender
+{
+    Male, Female, Diverse,
+}
+
+public enum Color
+{
+    Red, Green, Blue, White, Black
+}
+
+public enum BookType
+{
+    Hardcover, Softcover, AudioBook, EBook
+}
+
+// Den Konstanten können explizite Ganzzahlen zugewiesen werden
+public enum ErrorCode
+{
+    Unknown = 0,
+    FileNotFound = 200,
+    NotEnoughMemory = 12345
+}
+
+// Ein paar Variablen von den oben genannten Datentypen anlegen.
+Gender g = Gender.Female;
+Color c = Color.Green;
+BookType b = BookType.Softcover;
+ErrorCode code = ErrorCode.FileNotFound;
+
+// StringComparison ist eine Enumeration
+// Die Klasse Enum bietet einige Operationen an, um
+// mit Enumerations zu arbeiten
+&gt; StringComparison.Ordinal
+Ordinal
+&gt; (int)StringComparison.Ordinal
+4
+&gt; (StringComparison)4
+Ordinal
+&gt; Enum.IsDefined(typeof(StringComparison), -1)
+false
+&gt; Enum.IsDefined(typeof(StringComparison), 4)
+true
+&gt; Enum.GetName(typeof(StringComparison), 4)
+&quot;Ordinal&quot;
+&gt; Enum.GetNames(typeof(StringComparison))
+string[6] { &quot;CurrentCulture&quot;, &quot;CurrentCultureIgnoreCase&quot;, &quot;InvariantCulture&quot;, &quot;InvariantCultureIgnoreCase&quot;, &quot;Ordinal&quot;, &quot;OrdinalIgnoreCase&quot; }
+&gt; Enum.Parse(typeof(StringComparison), &quot;CurrentCulture&quot;)
+CurrentCulture
+&gt; StringComparison.Ordinal.ToString()
+&quot;Ordinal&quot;
+&gt; StringComparison.Ordinal.ToString(&quot;D&quot;)
+&quot;4&quot;</code></pre>
+<h1 id="delegates">Delegates</h1>
+<ul>
+<li>sind Datentypen, deren Objekte eine oder mehrere Methoden mit einer
+fest definierten Signatur kapseln können (“Methoden als Objekte”)</li>
+<li>wird ein Delegate-Objekt aufgerufen, wird die gekapselte Methode
+aufgerufen</li>
+<li>Analogie: Delegates sind so etwas ähnliches wie ein Funktionszeiger
+in C oder eine Art Alias für eine Methode</li>
+<li>Multicast-Delegate: das Delegate-Objekt kapselt nicht nur eine,
+sondern mehrere Methoden. Ein Aufruf des Delegate-Objekts bewirkt das
+Nacheinanderausführen aller gekapselten Methoden in der Reihenfolge, in
+der sie zum Delegate-Objekt hinzugefügt wurden. Der Rückgabewert der
+zuletzt aufgerufenen Methode bildet den Rückgabewert des aufgerufenen
+Delegates.</li>
+</ul>
+<pre class="line-numbers"><code class="language-csharp">
+// Eine Methode mit Signatur bool (string)
+public bool HasAtLeast3Chars(string w) =&gt; w.Length &gt;= 3;
+// Eine Methode mit Signatur bool (string)
+public bool StartsWithA(string w) =&gt; w.ToLowe().StartsWith(&quot;a&quot;);
+
+// Definiere neuen Datentyp namens FilterDelegate.
+// Objekte dieses Delegates können auf Methoden mit Signatur
+// bool (string) verweisen.
+public delegate bool FilterDelegate(string word);
+
+// Erzeuge Variable vom Datentyp FilterDelegate
+// filter verweist auf komptabible Methode HasAtLeast3Chars
+FilterDelegate filter = HasAtLeast3Chars;
+
+// Aufruf des Delegates filter bewirkt indirekt Aufruf von HasAtLeast3Chars
+bool result = filter(&quot;Hello&quot;); 
+
+// Hänge Methode an das Delegate filter an
+filter += StartsWithA; // filter = filter + StartsWithA;
+
+// Rufe Delegate-Objekt auf. Es wird zuerst HasAtLeastChars aufgerufen
+// und danach erfolgt der Aufruf von StartsWithA
+result = filter(&quot;Hello&quot;);
+
+// HasAtLeast3Chars von filter entfernen
+filter -= HasAtLeast3Chars;</code></pre>
+<h1 id="lambdas">Lambdas</h1>
+<ul>
+<li>sind namenslose Funktionen, die “on-the-fly” an der Stelle erzeugt
+werden, wo man sie benötigt</li>
+<li>sind i.d.R. sehr kurz und einfach gehalten</li>
+<li>lassen sich überall dort verwenden, wo ein Delegate-Objekt erwartet
+wird</li>
+</ul>
+<pre class="line-numbers"><code class="language-csharp">FilterDelegate filter = wort =&gt; wort.ToLower().StartsWith(&quot;a&quot;);
+bool result = filter(&quot;Hello&quot;); // Liefert false
+
+// Lambda, welches keine Argumente erwartet.
+// Der Datentyp Action ist ein Delegate, welches Methoden kapseln kann,
+// folgende SIgnatur haben: void (void)
+Action action = () =&gt; Console.WriteLine(&quot;Hello&quot;);
+action(); // Aufruf des Delegate gibt Hello auf Konsole aus
+
+// Lambdas mit einem Argument
+Action&lt;string&gt; action = arg =&gt; Console.WriteLine(arg);
+// oder
+Action&lt;string&gt; action = (arg) =&gt; Console.WriteLine(arg);
+
+// Lambdas mit mehreren Argumenten.
+// Func&lt;int,int,int&gt; ist ein Delegate, das Methoden der Signatur
+// int (int, int) kapseln kann.
+Func&lt;int, int, int&gt; calc = (x, y) =&gt; x + y;
+calc(1, 3); // Liefert 4
+
+// Lambdas mit Anweisungsblock
+Func&lt;int, int, int&gt; calc = (x, y) =&gt; { int sum = x + y; return sum; };
+calc(1, 3); // Liefert 4</code></pre>
+<h1 id="events">Events</h1>
+<ul>
+<li>implementieren das Observable-Observer-Pattern direkt in der Sprache
+C#</li>
+<li>ein Event kann als Member einer Klasse definiert werden
+<ul>
+<li>Abonnenten/Subscriber registrieren sich für die Events eines
+Objektes</li>
+<li>das Objekt löst Events aus und informiert dadurch automatisch die
+registrierten Abonennten</li>
+</ul></li>
+<li>basieren auf Delegates, aber bieten für diese folgende
+Schutzmaßnahmen:
+<ul>
+<li>dem Delegate kann außerhalb der event-definiernden Klasse nichts
+zugewiesen werden</li>
+<li>das Delegate kann von außerhalb nicht geleert werden</li>
+<li>Außen-Code kann sich nur als Subscriber eintragen und wieder
+austragen</li>
+<li>das Auslösen des Delegates kann nur die event-definierende Klasse
+selbst bewirken.</li>
+</ul></li>
+</ul>
+<pre class="line-numbers"><code class="language-csharp">// Ein Delegate für die Abonennten (Subscriber)
+public void NewsEventHandler(string reporter, string news);
+
+// Eine event-auslösende Klasse NewsAgency
+public class NewsAgency
+{
+    // NewsReceived ist zwar vom Delegate-Typ NewsEventHandler
+    // wird aber durch das Schlüsselwort event zusätzlich geschützt.
+    public event NewsEventHandler? NewsReceived;
+
+    // Eine Methode zum Informieren der NewsAgency
+    public void Inform(string informat, string news)
+    {
+        // Speichere News in die Datenbank
+        // Verarbeite / Analysiere News etc.
+
+        // Rufe alle registrierten Abonennten nacheinander auf
+        NewsReceived?.Invoke(informant, news);
+    }
+}
+
+// Irgendwo anders im Programm...
+NewsAgency agency = new NewsAgency();
+// Für das Event NewsReceived registrieren
+agency.NewsReceived += OnNewsReceived;
+agency.NewsReceived += (informant, news) =&gt; Console.WriteLine(&quot;Danke&quot;);
+// NewsAgency informieren (löst intern das NewsReceived Event aus)
+agency.Inform(&quot;Snowden&quot;, &quot;USA is the king&quot;);
+// Irgendwann später...Austragen für das Event
+agency.NewsReceived -= OnNewsReceived;
+
+// Definiert einen Abonennten (Subscriber)
+public void OnNewsReceived(string informant, string news)
+{
+    // Mache etwas mit den Informant und News
+}</code></pre>
+<h1 id="language-integrated-query-linq">Language Integrated Query
+(LINQ)</h1>
+<ul>
+<li>.Net bietet eine Sammlung von Erweiterungs-Methoden
+(extension-methods) für die Schnittstelle
+<code>IEnumerable&lt;T&gt;</code>. Diese Sammlung enthält u.a. Methoden
+für:
+<ul>
+<li>Sortierung und Gruppierung (<code>OrderBy</code>,
+<code>GroupBy</code>)</li>
+<li>Filterung (<code>Where</code>, <code>Distinct</code>,
+<code>Take</code>, <code>Skip</code>, <code>First</code>,
+<code>Last</code>)</li>
+<li>Transformation (<code>Select</code>)</li>
+<li>Datenquellen verknüpfen mit <code>Join</code></li>
+<li>Überprüfungen (<code>Any</code>, <code>All</code>)</li>
+<li>Mengenoperationen (<code>Union</code>, <code>Intersect</code>)</li>
+</ul></li>
+<li>neben der Methoden-Schreibweise gibt es eine SQL-ähnliche
+Schreibweise, die sogenannte LINQ</li>
+<li>Queries werden in den meisten Fällen nicht sofort ausgeführt.
+Folgende Situation führen jedoch zu einer Auswertung (und noch andere):
+<ul>
+<li>die Query wird mit <code>foreach</code> durchlaufen</li>
+<li>einige Methoden wie <code>Count</code>, <code>All</code> und
+<code>Any</code> werden aufgerufen, die als Ergebnis kein
+<code>IEnumerable</code> liefern, sondern einen konkreten Wert wie
+<code>int</code> oder <code>boolean</code> liefern</li>
+<li>man ruft <code>ToList</code> oder <code>ToArray</code> auf</li>
+</ul></li>
+</ul>
+<pre class="line-numbers"><code class="language-csharp">
+string[] lines = File.ReadAllLines(&quot;pfad&quot;);
+
+// Eine Query (Abfrage) die nur Zeilen ausgibt, deren Länge
+// mindestens 10 Zeichen beträgt.
+var longLinesQuery = lines.Where(line =&gt; line.Length &gt;= 10);
+
+// Alternative in LINQ
+var longLinesQuery = 
+    from line in lines
+    where line.Length &gt;= 10
+    select line;
+
+// Sortiere Zeilen nach deren Länge in absteigender Reihenfolge
+var orderedLines = lines.OrderByDescending(line =&gt; line.Length);
+
+// Alternative in LINQ
+var orderedLines =
+    from line in lines
+    orderby line.Length descending
+    select line;
+
+// Prüfe, ob alle Zeilen mit A beginnen
+bool result = lines.All(line =&gt; line.StartsWith(&quot;A&quot;));
+// keine direkte Alternative in LINQ
+
+// Prüfe, ob mindestens eine Zeile mit B beginnt
+result = lines.Any(line =&gt; line.StartsWith(&quot;B&quot;));
+// keine direkte Alternative in LINQ
+
+// Projeziere alle Zeilen auf Zeilen mit zusätzlicher Längenangabe
+var transformedLines = lines.Select(line =&gt; $&quot;{line} {line.Length}&quot;);
+
+// Alternative in LINQ
+var transformedLines =
+    from line in lines
+    let lineLength = line.Length
+    select $&quot;{line} {lineLength}&quot;;
+
+</code></pre>
+<h1
+id="vergleich-von-wertetypen-value-types-mit-referenztypen-reference-types">Vergleich
+von Wertetypen (Value Types) mit Referenztypen (Reference Types)</h1>
+<ul>
+<li>Hinweis: In der Entwicklung hat man es fast ausschließlich mit
+Referenztypen zu tun. Wertetypen sind nur dann sinnvoll, wenn man
+kleine, simple Datenstrukturen ohne “intelligentes” Verhalten benötigt,
+die bei Zuweisung bitweise kopiert werden sollen.</li>
+<li>eine Variable eines Value Types <code>V</code> <em>enthält</em> eine
+Instanz von <code>V</code>. Eine Variable eines Referenztyps
+<code>R</code> hingegen enthält lediglich einen <em>Verweis</em>
+(Speicheradresse) auf eine Instanz von <code>R</code>.</li>
+<li>bei der Zuweisung zweier Variablen vom Typ <code>V</code> wird die
+Instanz selbst bitweise kopiert. Bei der Zuweisung zweier Variablen vom
+Typ <code>R</code> wird lediglich der Verweis (Speicheradressen) auf die
+Instanz kopiert.</li>
+<li>Instanzen von <code>V</code> werden auf dem <em>Stack</em> abgelegt.
+Instanzen von <code>R</code> hingegen landen im <em>Heap</em>.</li>
+<li>Beachte: eine Zuweisung findet auch statt, wenn ein Argument bei
+einem Methodenaufruf übergeben wird. Zuweisungen finden ebenfalls statt,
+wenn eine aufgerufene Methode einen Wert an den Aufrufer zurückgibt. Im
+Falle von Value Types würden hier stets Kopien der Instanzen erzeugt
+werden. Im Falle von Reference Types würden lediglich die Verweise bzw.
+Speicheradressen auf die Instanzen kopiert werden.</li>
+</ul>
+<pre class="line-numbers"><code class="language-csharp">// int ist ein Value Type. a und b sind Variablen vom Typ int.
+// Sowohl a als auch b enthalten die jeweiligen Zahlenwerte.
+int a = 10;
+int b = 12;
+a = b; // Zahlenwert von b wird direkt in a kopiert.
+// a und b enthalten nun beide den Wert 12. Dieser existiert
+// zweimal im Speicher.
+
+// string ist ein Reference Type. x und y sind Variablen vom Typ string.
+// x und y enthalten lediglich Verweise auf String-Objekte im Heap.
+string x = &quot;Hello&quot;;
+string y = &quot;World&quot;;
+x = y; // der Verweis in y wird nach x kopiert
+// x verweist nun auf dasselbe String-Objekt wie y
+// Das String-Objekt mit Wert &quot;World&quot; kann nun sowohl
+// per x als auch per y angesprochen werden.
+x.Equals(&quot;World&quot;) // liefert True
+y.Equals(&quot;World&quot;) // liefert True
+object.ReferenceEquals(x, y) // liefert True</code></pre>
+<ul>
+<li>alle Datentypen, die per <code>struct</code> oder <code>enum</code>
+definiert werden, sind Value Types</li>
+<li>folgende Datentypen gehören u.a. zur Kategorie “Value Types”:
+<code>int</code>, <code>float</code>, <code>double</code>,
+<code>Guid</code>, <code>bool</code>, <code>decimal</code>,
+<code>Point</code>, <code>Size</code></li>
+</ul>
+<pre class="line-numbers"><code class="language-csharp">// Structure Types sind Value Types
+// Beachte: Structure Types haben _immer_ einen Default Constructor
+// der alle Member mit 0 initialisiert. Dies lässt sich nicht
+// verhindern!
+public struct Size
+{
+    public int Width { get; set; }
+    public int Height { get; set; }
+
+    public Size(int width, int height)
+    {
+        this.Width = width;
+        this.Height = height;
+    }
+}
+
+Size windowSize = new Size(1024, 768);
+Size desktopSize; // OK: aber Width = 0, Height = 0!!
+
+// Enums sind Value Types, da sie durch einen integralen Datentyp
+// repräsentiert werden.
+public enum Gender
+{
+    Male, Female, Diverse
+}</code></pre>
+<h1 id="glossar">Glossar</h1>
+<ul>
+<li>eine <em>Instanz</em> ist u.a. ein Objekt einer Klasse</li>
+</ul>
+
+<!-- Javascript added by toc-css.lua to make TOC expandable on click -->
+<script>
+
+  const b = document.querySelector("body");
+  const n = document.querySelector("nav");
+  const buttonsize = 20;
+
+  // click on "toc-title" to show TOC to the side
+  document.querySelector("#toc-title").addEventListener("click", function(e) {
+    if (e.clientX < e.currentTarget.getBoundingClientRect().left + buttonsize) {
+      n.classList.toggle("navshown");
+    } else {
+      b.classList.toggle("paddingleft");
+      n.classList.toggle("navside");
+      n.classList.remove("navshown");
+    };
+  });
+
+  // by default show TOC in large window
+  window.onload = function() {
+    if (window.innerWidth > 1000) {
+      b.classList.add("paddingleft");
+      n.classList.add("navside");
+    };
+  };
+
+  // show/hide TOC on resize
+  window.onresize = function () {
+    if (window.innerWidth > 1000) {
+      b.classList.add("paddingleft");
+      n.classList.add("navside");
+    } else {
+      b.classList.remove("paddingleft");
+      n.classList.remove("navside");
+    };
+  };
+
+  // show/hide subsections
+  const allLis = document.querySelectorAll("nav li");
+
+  for (const li of allLis) {
+    li.addEventListener('click', function (e) {
+      if (e.clientX < e.currentTarget.getBoundingClientRect().left + buttonsize) {
+        li.classList.toggle('subShow');
+        e.preventDefault();
+      };
+      if (e.clientX > e.currentTarget.getBoundingClientRect().left + 3*buttonsize) {
+        n.classList.remove("navshown");
+      };
+    });
+  };
+
+  // show full nav on tab, hide full nav on escape
+  document.addEventListener("keydown", function (e) {
+    if (e.which === 27) {
+      n.classList.remove("navshown");
+      e.preventDefault();
+    };
+    if (e.which === 9) {
+      n.classList.add("navshown");
+      e.preventDefault();
+    };
+  });
+
+  // hide full nav when clicked outside
+  document.addEventListener("click", function(e) {
+    if (n.classList.contains("navshown")) {
+      if (!n.contains(e.target)) {
+        n.classList.remove("navshown");
+      };
+    };
+  });
+
+</script>
+<script src="scripts/prism.js"></script>
+</body>
+</html>
