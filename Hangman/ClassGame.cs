@@ -101,11 +101,14 @@
         while (true)
         {
             Console.WriteLine();
-            Console.WriteLine(this.WordUnderline);
+            foreach(char ch in this.WordUnderline)
+            {
+                Console.WriteLine(" {0}", WordUnderline[(ch-1)]);
+            }
+            //Console.WriteLine(this.WordUnderline));
             Console.WriteLine("Bitte einen Buchstaben raten und mit Enter bestätigen");
             Console.WriteLine("Um das Spiel zu beenden, die Zahl 1 eingeben");
             eingabe = Console.ReadLine();
-            //Eingabe prüfen:
 
             this.CheckGuess(eingabe);
 
@@ -129,8 +132,6 @@
 
 
     //Static Methods
-
-
 
 
 
