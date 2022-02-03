@@ -40,6 +40,7 @@
 
     public void CheckGuess(string eingabe)
     {
+        Console.Clear();
         if (eingabe.Length > 1 || eingabe.Length < 1)
         {
             Console.WriteLine("Ungültige Eingabe, bitte genau einen Buchstaben eingeben!");
@@ -47,7 +48,7 @@
         else
         {
             char taste = eingabe.ToLower()[0];
-            if (WordAsChars.Contains(taste))
+            if (WordAsChars.Contains(taste) &! WordUnderline.Contains(taste))
             {
                 Console.WriteLine("Richtiiig!");
 
@@ -60,6 +61,10 @@
                 }
 
             }
+            else if(WordAsChars.Contains(taste) & WordUnderline.Contains(taste))
+            {
+                Console.WriteLine(" Der Buchstabe wurde schon erraten, probier mal einen neuen!");
+            }
             else
             {
                 Console.WriteLine("Leider kein Treffer! Nächster Versuch!");
@@ -71,6 +76,7 @@
     {
         while (true)
         {
+            Console.Clear();
             Console.WriteLine("Spiel Abbrechen? (J)a oder (N)ein");
             string bestaetigung = Console.ReadLine();
             if (bestaetigung.ToLower() == "j")
@@ -100,6 +106,7 @@
             Console.WriteLine("Um das Spiel zu beenden, die Zahl 1 eingeben");
             eingabe = Console.ReadLine();
             //Eingabe prüfen:
+
             this.CheckGuess(eingabe);
 
             if (!this.WordUnderline.Contains('_'))
