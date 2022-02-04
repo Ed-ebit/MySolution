@@ -18,7 +18,7 @@
         Random random = new Random();
         int wahlIndex = random.Next(0, words.Length);
         string chosenWord = words[wahlIndex];
-        return chosenWord.ToLower();
+        return chosenWord.ToUpper();
     }
 
     public void PrepareWord(string word)
@@ -38,7 +38,7 @@
 
     }
 
-    public void CheckGuess(string eingabe)
+    public int CheckGuess(string eingabe, int versuche)
     {
         Console.Clear();
         if (eingabe.Length > 1 || eingabe.Length < 1)
@@ -47,9 +47,10 @@
         }
         else
         {
-            char taste = eingabe.ToLower()[0];
+            char taste = eingabe.ToUpper()[0];
             if (WordAsChars.Contains(taste) &! WordUnderline.Contains(taste))
             {
+                versuche += 1;
                 Console.WriteLine("Richtiiig!");
 
                 for (int i = 0; i < this.WordAsChars.Length; i++)
@@ -67,9 +68,11 @@
             }
             else
             {
+                versuche += 1;
                 Console.WriteLine("Leider kein Treffer! Nächster Versuch!");
             }
         }
+        return versuche;
     }
 
     public bool AbortGame()
@@ -98,19 +101,20 @@
     {
         this.PrepareWord(ChooseWord());
         string eingabe = "";
+        int versuche = 0;
         while (true)
         {
             Console.WriteLine();
             foreach(char ch in this.WordUnderline)
             {
-                Console.WriteLine(" {0}", WordUnderline[(ch-1)]);
+                Console.Write(" {0}", ch);
             }
-            //Console.WriteLine(this.WordUnderline));
+            Console.WriteLine($"\n");
             Console.WriteLine("Bitte einen Buchstaben raten und mit Enter bestätigen");
             Console.WriteLine("Um das Spiel zu beenden, die Zahl 1 eingeben");
             eingabe = Console.ReadLine();
 
-            this.CheckGuess(eingabe);
+            versuche = this.CheckGuess(eingabe, versuche);
 
             if (!this.WordUnderline.Contains('_'))
             {
@@ -125,9 +129,20 @@
             }
         }
         Console.WriteLine();
-        Console.WriteLine("Glückwunsch! Gewonnen!");
         Console.WriteLine(this.WordUnderline);
-        Thread.Sleep(2500);
+        Console.WriteLine("Glückwunsch! Gewonnen! benötigte Versuche: {0}", versuche);
+        Stats spiel = new Stats(versuche, this.WordAsChars.Length);
+        spiel.ShowScore();
+        spiel.ProcessStats();
+        Console.WriteLine("Mit Enter zurück zum Menü!");
+        while (true)
+        {
+            string taste = Console.ReadLine();
+            if ( taste == "")
+            {
+                return;
+            }
+        }
     }
 
 
